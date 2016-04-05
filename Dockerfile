@@ -25,15 +25,30 @@ RUN rm android-sdk_r24.4.1-linux.tgz
 
 # Install Android tools
 RUN (while :; do echo 'y'; sleep 2; done) | /usr/local/android-sdk/tools/android update sdk --filter extra-android-support,extra-android-m2repository,platform-tool --no-ui -a
-RUN (while :; do echo 'y'; sleep 2; done) | /usr/local/android-sdk/tools/android update sdk --filter build-tools-23.0.1,build-tools-23.0.2,build-tools-21.1.2,build-tools-21.0.3,android-21,android-15,android-23 --no-ui -a
+RUN (while :; do echo 'y'; sleep 2; done) | /usr/local/android-sdk/tools/android update sdk --filter build-tools-22.0.1,build-tools-23.0.1,build-tools-23.0.2,build-tools-21.1.2,build-tools-21.0.3,android-21,android-22,android-15,android-23 --no-ui -a
 RUN (while :; do echo 'y'; sleep 2; done) | /usr/local/android-sdk/tools/android update sdk --filter extra-google-google_play_services,extra-google-m2repository --no-ui -a
 
 # Environment variables
 ENV ANDROID_HOME /usr/local/android-sdk
 ENV ANDROID_SDK_HOME $ANDROID_HOME
 ENV ANDROID_NDK_HOME /usr/local/android-ndk
+ENV GRADLE_HOME /opt/gradle
 ENV PATH $PATH:$ANDROID_SDK_HOME/tools
 ENV PATH $PATH:$ANDROID_SDK_HOME/platform-tools
+ENV PATH $PATH:$GRADLE_HOME/bin
 
 # Export JAVA_HOME variable
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
+
+# Install gradle
+RUN mkdir -p /opt/packages/gradle
+WORKDIR /opt/packages/gradle
+RUN wget https://services.gradle.org/distributions/gradle-2.10-bin.zip
+RUN unzip gradle-2.10-bin.zip
+RUN ln -s /opt/packages/gradle/gradle-2.10/ /opt/gradle
+
+WORKDIR /workspace
+
+RUN mkdir -p /root/.gradle
+ENV HOME /root
+VOLUME /root/.gradle
