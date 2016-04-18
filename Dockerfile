@@ -24,6 +24,7 @@ RUN mv android-sdk-linux /usr/local/android-sdk
 RUN rm android-sdk_r24.4.1-linux.tgz
 
 # Install Android tools
+ENV ANDROID_SUPPORT_VERSION 23.2.1
 RUN (while :; do echo 'y'; sleep 2; done) | /usr/local/android-sdk/tools/android update sdk --filter extra-android-support,extra-android-m2repository,platform-tool --no-ui -a
 RUN (while :; do echo 'y'; sleep 2; done) | /usr/local/android-sdk/tools/android update sdk --filter build-tools-22.0.1,build-tools-23.0.1,build-tools-23.0.2,build-tools-21.1.2,build-tools-21.0.3,android-21,android-22,android-15,android-23 --no-ui -a
 RUN (while :; do echo 'y'; sleep 2; done) | /usr/local/android-sdk/tools/android update sdk --filter extra-google-google_play_services,extra-google-m2repository --no-ui -a
