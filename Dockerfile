@@ -48,6 +48,11 @@ RUN wget https://services.gradle.org/distributions/gradle-2.10-bin.zip
 RUN unzip gradle-2.10-bin.zip
 RUN ln -s /opt/packages/gradle/gradle-2.10/ /opt/gradle
 
+#Install Ruby
+RUN apt-get install -y ruby1.9.3 
+RUN apt-get install -y ruby-dev
+RUN apt-get install -y ruby-bundler
+
 WORKDIR /workspace
 
 RUN mkdir -p /root/.gradle
