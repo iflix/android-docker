@@ -56,7 +56,7 @@ RUN apt-get update
 RUN apt-get install -y ruby2.3 
 RUN apt-get install -y ruby2.3-dev
 RUN gem install bundler
-RUN apt-get install build-essential
+RUN apt-get install -y build-essential
 
 WORKDIR /workspace
 
