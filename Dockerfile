@@ -24,9 +24,9 @@ RUN mv android-sdk-linux /usr/local/android-sdk
 RUN rm android-sdk_r24.4.1-linux.tgz
 
 # Install Android tools
-ENV ANDROID_SUPPORT_VERSION 24.0.0
+ENV ANDROID_SUPPORT_VERSION 24.1.1
 RUN (while :; do echo 'y'; sleep 2; done) | /usr/local/android-sdk/tools/android update sdk --filter extra-android-support,extra-android-m2repository,platform-tool --no-ui -a
-RUN (while :; do echo 'y'; sleep 2; done) | /usr/local/android-sdk/tools/android update sdk --filter build-tools-22.0.1,build-tools-23.0.1,build-tools-23.0.2,build-tools-23.0.3,build-tools-21.1.2,build-tools-24.0.0,build-tools-21.0.3,android-21,android-22,android-15,android-23,android-24 --no-ui -a
+RUN (while :; do echo 'y'; sleep 2; done) | /usr/local/android-sdk/tools/android update sdk --filter build-tools-22.0.1,build-tools-23.0.3,build-tools-21.1.2,build-tools-24.0.1,build-tools-24.0.0,build-tools-21.0.3,android-21,android-22,android-15,android-23,android-24 --no-ui -a
 RUN (while :; do echo 'y'; sleep 2; done) | /usr/local/android-sdk/tools/android update sdk --filter extra-google-google_play_services,extra-google-m2repository --no-ui -a
 
 # Environment variables
@@ -44,9 +44,9 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 # Install gradle
 RUN mkdir -p /opt/packages/gradle
 WORKDIR /opt/packages/gradle
-RUN wget https://services.gradle.org/distributions/gradle-2.14-bin.zip
-RUN unzip gradle-2.14-bin.zip
-RUN ln -s /opt/packages/gradle/gradle-2.14/ /opt/gradle
+RUN wget https://services.gradle.org/distributions/gradle-2.14.1-bin.zip
+RUN unzip gradle-2.14.1-bin.zip
+RUN ln -s /opt/packages/gradle/gradle-2.14.1/ /opt/gradle
 
 #Install Ruby
 
