@@ -28,6 +28,9 @@ RUN curl -sf -o android-sdk_r24.4.1-linux.tgz -L http://dl.google.com/android/an
     rm android-sdk_r24.4.1-linux.tgz
 
 # Install Android tools
+# Environment variables to force rebuild of image when SDK maven repos are updated.
+ENV ANDROID_SUPPORT_VERSION 24.2.0
+ENV GOOGLE_PLAY_SERVICES 9.4.0
 RUN (while :; do echo 'y'; sleep 2; done) | /usr/local/android-sdk/tools/android update sdk --filter \
                         "tools,platform-tools, \
                         build-tools-21.0.3, \
