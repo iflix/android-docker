@@ -22,10 +22,11 @@ RUN echo "debconf shared/accepted-oracle-license-v1-1 select true" | debconf-set
 
 
 # Install android sdk
-RUN curl -sf -o android-sdk_r24.4.1-linux.tgz -L http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz && \
-    tar -xzf android-sdk_r24.4.1-linux.tgz && \
+ENV ANDROID_SDK_VER 24.4.1
+RUN curl -sf -o android-sdk_r$ANDROID_SDK_VER-linux.tgz -L http://dl.google.com/android/android-sdk_r$ANDROID_SDK_VER-linux.tgz && \
+    tar -xzf android-sdk_r$ANDROID_SDK_VER-linux.tgz && \
     mv android-sdk-linux /usr/local/android-sdk && \
-    rm android-sdk_r24.4.1-linux.tgz
+    rm android-sdk_r$ANDROID_SDK_VER-linux.tgz
 
 # Install Android tools
 # Environment variables to force rebuild of image when SDK maven repos are updated.
