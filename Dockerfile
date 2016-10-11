@@ -48,7 +48,6 @@ RUN (while :; do echo 'y'; sleep 2; done) | /usr/local/android-sdk/tools/android
 # Environment variables
 ENV ANDROID_HOME /usr/local/android-sdk
 ENV ANDROID_SDK_HOME $ANDROID_HOME
-ENV ANDROID_NDK_HOME /usr/local/android-ndk
 ENV GRADLE_HOME /opt/gradle
 ENV PATH $PATH:$ANDROID_SDK_HOME/tools
 ENV PATH $PATH:$ANDROID_SDK_HOME/platform-tools
