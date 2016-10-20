@@ -36,9 +36,9 @@ RUN (while :; do echo 'y'; sleep 2; done) | /usr/local/android-sdk/tools/android
                         "tools,platform-tools, \
                         build-tools-24.0.2,build-tools-24.0.3, \
                         build-tools-25.0.0, \
-                        android-24,android-25 \
-                        extra-android-support,extra-android-m2repository, \
-                        extra-google-google_play_services,extra-google-m2repository" \
+                        android-24,android-25, \
+                        extra-android-m2repository, \
+                        extra-google-m2repository" \
                         --no-ui --all
 
 
