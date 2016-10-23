@@ -1,0 +1,28 @@
+{
+  "agent": {
+    "os": "linux",
+    "docker": true
+  },
+  "steps": [
+    {
+      "name": "docker_build",
+      "image": "android"
+    },
+    {
+      "name": "docker_tag",
+      "image": "android",
+      "force": true,
+      "oldTag": "latest",
+      "newTag": "${BUILDKITE_BRANCH}-${BUILDKITE_BUILD_NUMBER}"
+    },
+    {
+      "name": "docker_push",
+      "image": "android"
+    },
+    {
+      "name": "docker_push",
+      "image": "android",
+      "tag": "${BUILDKITE_BRANCH}-${BUILDKITE_BUILD_NUMBER}"
+    }
+  ]
+}
