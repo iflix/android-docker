@@ -5,6 +5,8 @@ ENV DEBIAN_FRONTEND noninteractive
 # Add oracle-jdk8 to repositories
 # Install oracle-jdk8
 # Install Ruby
+# JAVA_VERSION environment variable to foce rebuild. Set to version at ppa http://www.ubuntuupdates.org/ppa/webupd8_java.
+ENV JAVA_VERSION 8u111
 RUN echo "debconf shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections && \
     echo "debconf shared/accepted-oracle-license-v1-1 seen true" | debconf-set-selections && \
     apt-get update && \
@@ -34,9 +36,8 @@ ENV ANDROID_SUPPORT_VERSION 25.0.1
 ENV GOOGLE_PLAY_SERVICES 9.8.0
 RUN (while :; do echo 'y'; sleep 2; done) | /usr/local/android-sdk/tools/android update sdk --filter \
                         "tools,platform-tools, \
-                        build-tools-24.0.2,build-tools-24.0.3, \
                         build-tools-25.0.0, \
-                        android-24,android-25, \
+                        android-25, \
                         extra-android-m2repository, \
                         extra-google-m2repository" \
                         --no-ui --all
