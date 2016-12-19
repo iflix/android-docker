@@ -32,11 +32,11 @@ RUN curl -sf -o android-sdk_r$ANDROID_SDK_VER-linux.tgz -L http://dl.google.com/
 
 # Install Android tools
 # Environment variables to force rebuild of image when SDK maven repos are updated.
-ENV ANDROID_SUPPORT_VERSION 25.0.1
+ENV ANDROID_SUPPORT_VERSION 25.1.0
 ENV GOOGLE_PLAY_SERVICES 10.0.1
 RUN (while :; do echo 'y'; sleep 2; done) | /usr/local/android-sdk/tools/android update sdk --filter \
                         "tools,platform-tools, \
-                        build-tools-25.0.1, \
+                        build-tools-25.0.2, \
                         android-25, \
                         extra-android-m2repository, \
                         extra-google-m2repository" \
