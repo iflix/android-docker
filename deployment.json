@@ -1,7 +1,6 @@
 {
   "agent": {
-    "os": "linux",
-    "docker": true
+    "stack": "iflix-elastic-ci"
   },
   "steps": [
     {
