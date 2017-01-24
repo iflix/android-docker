@@ -15,6 +15,10 @@
       "newTag": "${BUILDKITE_BRANCH}-${BUILDKITE_BUILD_NUMBER}"
     },
     {
+      "name": "ecr_create_repo",
+      "repositoryName": "android"
+    },
+    {
       "name": "docker_push",
       "image": "android"
     },
