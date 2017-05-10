@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.9.19
+FROM phusion/baseimage:0.9.21
 ENV DEBIAN_FRONTEND noninteractive
 
 # First, install add-apt-repository and bzip2
@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # Install oracle-jdk8
 # Install Ruby
 # JAVA_VERSION environment variable to foce rebuild. Set to version at ppa http://www.ubuntuupdates.org/ppa/webupd8_java.
-ENV JAVA_VERSION 8u121-1~webupd8~2
+ENV JAVA_VERSION 8u131-1~webupd8~2
 RUN echo "debconf shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections && \
     echo "debconf shared/accepted-oracle-license-v1-1 seen true" | debconf-set-selections && \
     apt-get update && \
@@ -24,24 +24,26 @@ RUN echo "debconf shared/accepted-oracle-license-v1-1 select true" | debconf-set
 
 
 # Install android sdk
-ENV ANDROID_SDK_VER 24.4.1
-RUN curl -sf -o android-sdk_r$ANDROID_SDK_VER-linux.tgz -L http://dl.google.com/android/android-sdk_r$ANDROID_SDK_VER-linux.tgz && \
-    tar -xzf android-sdk_r$ANDROID_SDK_VER-linux.tgz && \
-    mv android-sdk-linux /usr/local/android-sdk && \
-    rm android-sdk_r$ANDROID_SDK_VER-linux.tgz
+ENV ANDROID_SDK_VER 3859397
+RUN curl -sf -o sdk-tools-linux-$ANDROID_SDK_VER.zip -L https://dl.google.com/android/repository/sdk-tools-linux-$ANDROID_SDK_VER.zip && \
+    unzip sdk-tools-linux-$ANDROID_SDK_VER.zip && \
+    mkdir /usr/local/android-sdk && \
+    mv tools /usr/local/android-sdk/tools && \
+    rm sdk-tools-linux-$ANDROID_SDK_VER.zip
 
 # Install Android tools
 # Environment variables to force rebuild of image when SDK maven repos are updated.
-ENV ANDROID_SUPPORT_VERSION 25.3.1
-ENV GOOGLE_PLAY_SERVICES 10.2.1
-RUN (while :; do echo 'y'; sleep 2; done) | /usr/local/android-sdk/tools/android update sdk --filter \
-                        "tools,platform-tools, \
-                        build-tools-25.0.2, \
-                        android-25, \
-                        extra-android-m2repository, \
-                        extra-google-m2repository" \
-                        --no-ui --all
-
+ENV ANDROID_SUPPORT_REPO 47
+ENV GOOGLE_REPO 47
+COPY android-sdk-license /tmp/
+RUN mkdir /usr/local/android-sdk/licenses && \
+    mv /tmp/android-sdk-license /usr/local/android-sdk/licenses/ && \
+    /usr/local/android-sdk/tools/bin/sdkmanager \
+                        "tools" "platform-tools" \
+                        "build-tools;25.0.3" \
+                        "platforms;android-25" \
+                        "extras;android;m2repository" \
+                        "extras;google;m2repository"
 
 # Environment variables
 ENV ANDROID_HOME /usr/local/android-sdk

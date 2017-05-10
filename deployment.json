@@ -1,11 +1,15 @@
 {
+  "setup": {
+    "prepend": true
+  },
   "agent": {
     "stack": "iflix-elastic-ci"
   },
   "steps": [
     {
       "name": "docker_build",
-      "image": "android"
+      "image": "android",
+      "prepend": "echo $ANDROID_LICENSE > android-sdk-license"
     },
     {
       "name": "docker_tag",
