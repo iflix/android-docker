@@ -4,6 +4,10 @@
   },
   "steps": [
     {
+      "name": "command",
+      "command": "echo $ANDROID_LICENSE > android-sdk-license"
+    },
+    {
       "name": "docker_build",
       "image": "android"
     },
