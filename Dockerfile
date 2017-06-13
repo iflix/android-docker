@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.9.21
+FROM phusion/baseimage:0.9.22
 ENV DEBIAN_FRONTEND noninteractive
 
 # First, install add-apt-repository and bzip2
@@ -33,8 +33,7 @@ RUN curl -sf -o sdk-tools-linux-$ANDROID_SDK_VER.zip -L https://dl.google.com/an
 
 # Install Android tools
 # Environment variables to force rebuild of image when SDK maven repos are updated.
-ENV ANDROID_SUPPORT_REPO 47
-ENV GOOGLE_REPO 47
+ENV GOOGLE_REPO 53
 COPY android-sdk-license /tmp/
 RUN mkdir /usr/local/android-sdk/licenses && \
     mv /tmp/android-sdk-license /usr/local/android-sdk/licenses/ && \
@@ -42,16 +41,13 @@ RUN mkdir /usr/local/android-sdk/licenses && \
                         "tools" "platform-tools" \
                         "build-tools;25.0.3" \
                         "platforms;android-25" \
-                        "extras;android;m2repository" \
                         "extras;google;m2repository"
 
 # Environment variables
 ENV ANDROID_HOME /usr/local/android-sdk
 ENV ANDROID_SDK_HOME $ANDROID_HOME
-ENV GRADLE_HOME /opt/gradle
-ENV PATH $PATH:$ANDROID_SDK_HOME/tools
+ENV PATH $PATH:$ANDROID_SDK_HOME/tools/bin
 ENV PATH $PATH:$ANDROID_SDK_HOME/platform-tools
-ENV PATH $PATH:$GRADLE_HOME/bin
 
 # Export JAVA_HOME variable
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
