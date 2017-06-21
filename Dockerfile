@@ -33,7 +33,7 @@ RUN curl -sf -o sdk-tools-linux-$ANDROID_SDK_VER.zip -L https://dl.google.com/an
 
 # Install Android tools
 # Environment variables to force rebuild of image when SDK maven repos are updated.
-ENV GOOGLE_REPO 53
+ENV GOOGLE_REPO 54
 COPY android-sdk-license /tmp/
 RUN mkdir /usr/local/android-sdk/licenses && \
     mv /tmp/android-sdk-license /usr/local/android-sdk/licenses/ && \
