@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # Install oracle-jdk8
 # Install Ruby
 # JAVA_VERSION environment variable to foce rebuild. Set to version at ppa http://www.ubuntuupdates.org/ppa/webupd8_java.
-ENV JAVA_VERSION 8u131-1~webupd8~2
+ENV JAVA_VERSION 8u144-1~webupd8~0
 RUN echo "debconf shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections && \
     echo "debconf shared/accepted-oracle-license-v1-1 seen true" | debconf-set-selections && \
     apt-get update && \
@@ -33,7 +33,7 @@ RUN curl -sf -o sdk-tools-linux-$ANDROID_SDK_VER.zip -L https://dl.google.com/an
 
 # Install Android tools
 # Environment variables to force rebuild of image when SDK maven repos are updated.
-ENV GOOGLE_REPO 54
+ENV GOOGLE_REPO 57
 COPY android-sdk-license /tmp/
 RUN mkdir /usr/local/android-sdk/licenses && \
     mv /tmp/android-sdk-license /usr/local/android-sdk/licenses/ && \
