@@ -9,7 +9,7 @@
     {
       "name": "docker_build",
       "image": "android",
-      "prepend": "echo -e '$ANDROID_LICENSE' > android-sdk-license"
+      "prepend": "echo -e \"\$ANDROID_LICENSE\" > android-sdk-license"
     },
     {
       "name": "docker_tag",
