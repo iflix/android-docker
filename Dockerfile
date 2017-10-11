@@ -39,7 +39,7 @@ RUN mkdir /usr/local/android-sdk/licenses && \
     mv /tmp/android-sdk-license /usr/local/android-sdk/licenses/ && \
     /usr/local/android-sdk/tools/bin/sdkmanager \
                         "tools" "platform-tools" \
-                        "build-tools;26.0.1" \
+                        "build-tools;26.0.2" \
                         "platforms;android-26" \
                         "extras;google;m2repository"
 
