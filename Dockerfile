@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.9.22
+FROM phusion/baseimage:0.10.0
 ENV DEBIAN_FRONTEND noninteractive
 
 # First, install add-apt-repository and bzip2
@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # Install oracle-jdk8
 # Install Ruby
 # JAVA_VERSION environment variable to foce rebuild. Set to version at ppa http://www.ubuntuupdates.org/ppa/webupd8_java.
-ENV JAVA_VERSION 8u151-1~webupd8~0
+ENV JAVA_VERSION 8u161-1~webupd8~0
 RUN echo "debconf shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections && \
     echo "debconf shared/accepted-oracle-license-v1-1 seen true" | debconf-set-selections && \
     apt-get update && \
@@ -38,7 +38,7 @@ RUN mkdir /usr/local/android-sdk/licenses && \
     mv /tmp/android-sdk-license /usr/local/android-sdk/licenses/ && \
     /usr/local/android-sdk/tools/bin/sdkmanager \
                         "tools" "platform-tools" \
-                        "build-tools;27.0.2" \
+                        "build-tools;27.0.3" \
                         "platforms;android-27"
 
 # Environment variables
