@@ -2,21 +2,13 @@ FROM phusion/baseimage:0.11
 ENV DEBIAN_FRONTEND noninteractive
 
 # First, install add-apt-repository and bzip2
-# Add oracle-jdk8 to repositories
-# Install oracle-jdk8
 # Install Ruby
-# JAVA_VERSION environment variable to foce rebuild. Set to version at ppa http://www.ubuntuupdates.org/ppa/webupd8_java.
-ENV JAVA_VERSION 8u181-1~webupd8~1
-RUN echo "debconf shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections && \
-    echo "debconf shared/accepted-oracle-license-v1-1 seen true" | debconf-set-selections && \
-    apt-get update && \
+RUN apt-get update && \
     apt-get -y install software-properties-common curl bzip2 unzip openssh-client git lib32stdc++6 lib32z1 && \
-    add-apt-repository ppa:webupd8team/java && \
     apt-add-repository ppa:brightbox/ruby-ng && \
     apt-get update && \
-    apt-get -y install oracle-java8-installer ruby2.5 ruby2.5-dev build-essential && \
+    apt-get -y install openjdk-8-jdk-headless ruby2.5 ruby2.5-dev build-essential && \
     gem install bundler && \
-    rm -rf /var/cache/oracle-jdk8-installer && \
     apt-get -y remove software-properties-common python-software-properties && \
     apt-get -y autoremove && \
     apt-get clean && \
@@ -38,8 +30,8 @@ RUN mkdir /usr/local/android-sdk/licenses && \
     mv /tmp/android-sdk-license /usr/local/android-sdk/licenses/ && \
     /usr/local/android-sdk/tools/bin/sdkmanager \
                         "tools" "platform-tools" \
-                        "build-tools;28.0.3" \
-                        "platforms;android-28"
+                        "build-tools;29.0.1" \
+                        "platforms;android-29"
 
 # Environment variables
 ENV ANDROID_HOME /usr/local/android-sdk
@@ -48,7 +40,7 @@ ENV PATH $PATH:$ANDROID_SDK_HOME/tools/bin
 ENV PATH $PATH:$ANDROID_SDK_HOME/platform-tools
 
 # Export JAVA_HOME variable
-ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
 WORKDIR /workspace
 
