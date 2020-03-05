@@ -17,11 +17,11 @@ RUN apt-get update && \
 
 # Install android sdk
 ENV ANDROID_SDK_VER 6200805
-RUN curl -sf -o commandlinetools-linux-$ANDROID_SDK_VER_latest.zip -L https://dl.google.com/android/repository/commandlinetools-linux-$ANDROID_SDK_VER_latest.zip && \
-    unzip commandlinetools-linux-$ANDROID_SDK_VER_latest.zip && \
+RUN curl -sf -o commandlinetools-linux-${ANDROID_SDK_VER}_latest.zip -L https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_VER}_latest.zip && \
+    unzip commandlinetools-linux-${ANDROID_SDK_VER}_latest.zip && \
     mkdir /usr/local/android-sdk && \
     mv tools /usr/local/android-sdk/tools && \
-    rm commandlinetools-linux-$ANDROID_SDK_VER_latest.zip
+    rm commandlinetools-linux-${ANDROID_SDK_VER}_latest.zip
 
 # Install Android tools
 # Environment variables to force rebuild of image when SDK maven repos are updated.
