@@ -16,25 +16,25 @@ RUN apt-get update && \
 
 
 # Install android sdk
-ENV ANDROID_SDK_VER 4333796
-RUN curl -sf -o sdk-tools-linux-$ANDROID_SDK_VER.zip -L https://dl.google.com/android/repository/sdk-tools-linux-$ANDROID_SDK_VER.zip && \
-    unzip sdk-tools-linux-$ANDROID_SDK_VER.zip && \
+ENV ANDROID_SDK_VER 6200805
+RUN curl -sf -o commandlinetools-linux-${ANDROID_SDK_VER}_latest.zip -L https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_VER}_latest.zip && \
+    unzip commandlinetools-linux-${ANDROID_SDK_VER}_latest.zip && \
     mkdir /usr/local/android-sdk && \
     mv tools /usr/local/android-sdk/tools && \
-    rm sdk-tools-linux-$ANDROID_SDK_VER.zip
+    rm commandlinetools-linux-${ANDROID_SDK_VER}_latest.zip
 
 # Install Android tools
 # Environment variables to force rebuild of image when SDK maven repos are updated.
+ENV ANDROID_HOME /usr/local/android-sdk
 COPY android-sdk-license /tmp/
 RUN mkdir /usr/local/android-sdk/licenses && \
     mv /tmp/android-sdk-license /usr/local/android-sdk/licenses/ && \
-    /usr/local/android-sdk/tools/bin/sdkmanager \
+    /usr/local/android-sdk/tools/bin/sdkmanager --sdk_root=${ANDROID_HOME} \
                         "tools" "platform-tools" \
-                        "build-tools;29.0.1" \
+                        "build-tools;29.0.3" \
                         "platforms;android-29"
 
 # Environment variables
-ENV ANDROID_HOME /usr/local/android-sdk
 ENV ANDROID_SDK_HOME $ANDROID_HOME
 ENV PATH $PATH:$ANDROID_SDK_HOME/tools/bin
 ENV PATH $PATH:$ANDROID_SDK_HOME/platform-tools
